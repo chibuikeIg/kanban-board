@@ -4,9 +4,9 @@
             <a href="#" @click="showAddColumnModal()" class="action-button--add-btn">New Board</a>
         </div>
         <div class="board">
-            <div class="board__column">
+            <div class="board__column" v-for="board in boards">
                 <div class="board__column__header">
-                    <h3 class="board__column__header--title">This is a column title</h3>
+                    <h3 class="board__column__header--title">{{board.title}}</h3>
                     <div class="board__column__header--del-btn"><a href="#">&times;</a></div>
                 </div>
                 <div class="board__column__body">
@@ -71,7 +71,10 @@
             },
 
             fetchBoards() {
-
+                
+                this.$http.get('/boards').then(response=> {
+                    this.boards= response.data
+                })
             },
 
             createBoard(e) {
