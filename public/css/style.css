@@ -165,4 +165,8 @@
   width: 20%;
   padding: 10px;
   border-radius: 0.25rem;
+}
+.container .modal-container__body .form__group--text-danger {
+  color: red;
+  font-size: 12px;
 }/*# sourceMappingURL=style.css.map */
