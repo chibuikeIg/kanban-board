@@ -1,7 +1,7 @@
 <template>
     <div class="container__content">
         <div class="action-button">
-            <a href="#" class="action-button--add-btn">New Board</a>
+            <a href="#" @click="showAddColumnModal()" class="action-button--add-btn">New Board</a>
         </div>
         <div class="board">
             <div class="board__column">
@@ -26,5 +26,37 @@
                 </div>
             </div>
         </div>
+        <modal name="add-column-modal">
+            <div class="modal-container">
+                <div class="modal-container__header">
+                    <h3 class="container__header--title">Add New Board</h3>
+                </div>
+                <div class="modal-container__body">
+                    <form class="form">
+                        <div class="form__group">
+                            <label class="form__group--label">Title</label>
+                            <input type="text" name="title" class="form__group--form-control" placeholder="Enter board title">
+                        </div>
+                        <div class="form__group">
+                            <button type="submit" class="form__group--btn">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </modal>
     </div>
 </template>
+
+<script>
+    export default {
+        name: 'BoardComponent',
+        methods: {
+
+            showAddColumnModal() {
+
+                this.$modal.show("add-column-modal")
+
+            }
+        }
+    }
+</script>

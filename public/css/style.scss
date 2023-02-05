@@ -155,4 +155,56 @@ $white: #fff;
         }
     }
 
+
+    .modal-container {
+
+        &__header{
+            width:$full_width;
+            padding:10px;
+            border-bottom:1px solid #ced4da;
+        }
+
+        &__body{
+            width: $full_width;
+            padding: 10px;
+
+            .form {
+                margin-top: 20px;
+
+                &__group {
+                    margin-bottom: 3em;
+                    
+                    &--label{
+                        display: block;
+                        font-size: 20px;
+                        margin-bottom: 10px;
+                    }
+
+                    &--form-control {
+                        width: 100%;
+                        padding:20px;
+                        border: 1px solid #ced4da;
+                        border-radius: 0.25rem;
+
+                        &:focus{
+                            border:1px solid $primaryColor;
+                            outline: none;
+
+                        }
+                    }
+
+                    &--btn{
+                        background-color: $primaryColor;
+                        color:#fff;
+                        border: 1px solid $primaryColor;
+                        cursor: pointer;
+                        width:20%;
+                        padding:10px;
+                        border-radius: 0.25rem;
+                    }
+                }
+            }
+        }
+    }
+
 }

@@ -126,4 +126,43 @@
   border: 1px solid aquamarine;
   text-decoration: none;
   border-radius: 5px;
+}
+.container .modal-container__header {
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #ced4da;
+}
+.container .modal-container__body {
+  width: 100%;
+  padding: 10px;
+}
+.container .modal-container__body .form {
+  margin-top: 20px;
+}
+.container .modal-container__body .form__group {
+  margin-bottom: 3em;
+}
+.container .modal-container__body .form__group--label {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.container .modal-container__body .form__group--form-control {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+.container .modal-container__body .form__group--form-control:focus {
+  border: 1px solid aquamarine;
+  outline: none;
+}
+.container .modal-container__body .form__group--btn {
+  background-color: aquamarine;
+  color: #fff;
+  border: 1px solid aquamarine;
+  cursor: pointer;
+  width: 20%;
+  padding: 10px;
+  border-radius: 0.25rem;
 }/*# sourceMappingURL=style.css.map */
