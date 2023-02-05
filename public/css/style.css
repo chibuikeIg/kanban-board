@@ -1,0 +1,129 @@
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.container {
+  width: 100%;
+}
+.container__navbar {
+  width: 100%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 1;
+}
+.container__navbar--logo {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-left: 7rem;
+}
+.container__content {
+  width: 85%;
+  margin: 2rem auto;
+}
+.container__content .board {
+  width: 100%;
+  height: 80vh;
+  background-color: aquamarine;
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  border-radius: 5px;
+  overflow: auto;
+}
+.container__content .board__column {
+  width: 32.5%;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  overflow: auto;
+  position: relative;
+  height: 70vh;
+}
+.container__content .board__column__header {
+  width: 100%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding: 15px;
+  display: flex;
+}
+.container__content .board__column__header--title {
+  width: 95%;
+}
+.container__content .board__column__header--del-btn {
+  font-size: 28px;
+  width: 5%;
+}
+.container__content .board__column__header--del-btn a {
+  display: block;
+  color: #000;
+  text-decoration: none;
+}
+.container__content .board__column__header--del-btn a:hover {
+  color: red;
+}
+.container__content .board__column__body {
+  margin-top: 2rem;
+  padding: 10px;
+}
+.container__content .board__column__body--card {
+  display: flex;
+  gap: 16px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+.container__content .board__column__body--card .card-draggable, .container__content .board__column__body--card .card-title {
+  padding: 15px;
+}
+.container__content .board__column__body--card .card-title {
+  width: 95%;
+}
+.container__content .board__column__body--card .card-draggable {
+  width: 15%;
+  border-right: 1px solid #000;
+}
+.container__content .board__column__body--card .card-draggable span {
+  display: block;
+  width: 100%;
+}
+.container__content .board__column__footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  z-index: 1;
+}
+.container__content .board__column__footer--add-btn {
+  width: 15%;
+  float: right;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  background-color: aquamarine;
+}
+.container__content .board__column__footer--add-btn a {
+  display: block;
+  font-size: 20px;
+  padding: 20px;
+  color: #000;
+}
+.container__content .board__column__footer--add-btn a:hover {
+  color: #000;
+}
+.container__content .action-button {
+  margin-bottom: 2rem;
+  text-align: right;
+}
+.container__content .action-button--add-btn {
+  padding: 10px;
+  background-color: aquamarine;
+  color: #fff;
+  border: 1px solid aquamarine;
+  text-decoration: none;
+  border-radius: 5px;
+}/*# sourceMappingURL=style.css.map */

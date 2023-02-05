@@ -1,0 +1,158 @@
+*{
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+$full_width : 100%;
+$primaryColor: aquamarine;
+$white: #fff;
+
+.container {
+    width:$full_width;
+
+    &__navbar{
+        width:$full_width;
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+        padding: 10px;
+        z-index: 1;
+
+        &--logo{
+            width:fit-content;
+            margin-left:7rem;
+        }
+    }
+
+    &__content {
+        width:85%;
+        margin:2rem auto;
+
+        .board {
+
+            width: $full_width;
+            height:80vh;
+            background-color: $primaryColor;
+            padding:15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap:15px;
+            border-radius: 5px;
+            overflow: auto;
+            
+
+            &__column{
+
+                width:32.5%;
+                border-radius: 5px;
+                background-color: #fff;
+                box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+                overflow: auto;
+                position: relative;
+                height:70vh;
+
+                &__header{
+                    width: $full_width;
+                    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+                    background-color: #fff;
+                    padding:15px;
+                    display: flex;
+
+                    &--title {
+                        width:95%;
+                    }
+                    
+                    &--del-btn{
+                        font-size: 28px;
+                        width:5%;
+
+                        a {
+                            display: block;
+                            color:#000;
+                            text-decoration: none;
+
+                            &:hover{
+                                color:red;
+                            }
+                        }
+                    }
+                }
+
+                &__body{
+                    margin-top: 2rem;
+                    padding:10px;
+                    
+                    &--card {
+                        display: flex;
+                        gap:16px;
+                        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+                        border-radius: 5px;
+                        margin-bottom: 10px;
+
+                        .card-draggable, .card-title {
+                            padding:15px;
+                        }
+
+                        .card-title {
+                            width:95%;
+                        }
+
+                        .card-draggable {
+                            width: 15%;
+                            border-right: 1px solid #000;
+
+                            span{
+                                display: block;
+                                width: $full_width;
+                            }
+                        }
+                    }
+                }
+
+                &__footer{
+                    position: absolute;
+                    bottom: 0;
+                    width: $full_width;
+                    padding:10px;
+                    z-index: 1;
+
+                    &--add-btn {
+                        width:15%;
+                        float:right;
+                        text-align: center;
+                        border-radius: 50%;
+                        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+                        background-color: $primaryColor;
+
+                        a {
+                            display: block;
+                            font-size: 20px;
+                            padding:20px;
+                            color:#000;
+
+                            &:hover{
+                                color:#000;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        .action-button{
+            margin-bottom: 2rem;
+            text-align: right;
+
+            &--add-btn{
+                padding:10px;
+                background-color: $primaryColor;
+                color:#fff;
+                border:1px solid $primaryColor;
+                text-decoration: none;
+                border-radius: 5px;
+            }
+        }
+    }
+
+}
