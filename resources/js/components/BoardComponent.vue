@@ -63,6 +63,14 @@
                             <span class="form__group--text-danger description"></span>
                         </div>
                         <div class="form__group">
+                            <label class="form__group--label">Status</label>
+                            <select name="status" ref="status"  class="form__group--form-control el">
+                                <option value="1">Active</option>
+                                <option value="0">inactive</option>
+                            </select>
+                            <span class="form__group--text-danger status"></span>
+                        </div>
+                        <div class="form__group">
                             <input type="hidden"  ref="board_id">
                             <button type="submit" class="form__group--btn">Add</button>
                         </div>
@@ -70,7 +78,7 @@
                 </div>
             </div>
         </modal>
-        <modal name="edit-card-modal" :height="600">
+        <modal name="edit-card-modal" :height="650">
             <div class="modal-container">
                 <div class="modal-container__header">
                     <h3 class="container__header--title">Edit Card</h3>
@@ -88,8 +96,19 @@
                             <span class="form__group--text-danger description"></span>
                         </div>
                         <div class="form__group">
+                            <label class="form__group--label">Status</label>
+                            <select name="status" v-model="card.status" class="form__group--form-control el">
+                                <template>
+                                        <option value="1" :selected="card.status == 1">Active</option>
+                                        <option value="0" :selected="card.status == 0">Inactive</option>
+                                </template>
+                            </select>
+                            <span class="form__group--text-danger status"></span>
+                        </div>
+                        <div class="form__group">
                             <input type="hidden"  ref="card_id" v-model="card.id">
                             <button type="submit" class="form__group--btn">Save changes</button>
+                            <button type="button" @click="deleteCard(card.id)" class="form__group--btn btn-danger">Remove card</button>
                         </div>
                     </form>
                 </div>
@@ -167,7 +186,8 @@
                 let formData = {
                     title:this.$refs.title.value,
                     description: this.$refs.description.value,
-                    board_id: this.board_id
+                    board_id: this.board_id,
+                    status: this.$refs.status.value
                 }
 
                 this.$http.post('/cards', formData).then(_=> {
@@ -182,18 +202,21 @@
                 })
             },
 
+            
+
             showEditCardModal(card) {
                 this.$modal.show("edit-card-modal")
                 this.card = card
             },
 
-            editCard() {
+            editCard(e) {
 
                 e.preventDefault()
                 
                 let formData = {
-                    title:this.$refs.title.value,
-                    description: this.$refs.description.value,
+                    title: this.card.title,
+                    description: this.card.description,
+                    status: this.card.status
                 }
 
                 this.$http.put('/cards/'+this.card.id, formData).then(_=> {
@@ -205,6 +228,16 @@
                 }).catch(err=> {
                     
                     this.handleError(err.response.data.errors)
+                })
+            },
+
+            deleteCard(id) {
+
+                this.$http.delete('/cards/'+id).then(_=> {
+
+                    this.fetchBoards()
+                    this.$modal.hide("edit-card-modal")
+
                 })
             },
 

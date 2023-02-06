@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('board_id')->references('id')->on('boards')->cascadeOnDelete();
             $table->string('title');
             $table->text('description');
+            $table->boolean('status');
             $table->softDeletes();
             $table->timestamps();
         });

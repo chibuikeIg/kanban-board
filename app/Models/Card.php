@@ -10,7 +10,7 @@ class Card extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'board_id'];
+    protected $fillable = ['title', 'description', 'board_id', 'status', 'deleted_at'];
 
     protected $hidden = ['created_at', 'updated_at'];
 

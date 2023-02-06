@@ -179,7 +179,7 @@ $white: #fff;
                 margin-top: 20px;
 
                 &__group {
-                    margin-bottom: 3em;
+                    margin-bottom: 1.5em;
                     
                     &--label{
                         display: block;
@@ -208,6 +208,12 @@ $white: #fff;
                         width:20%;
                         padding:10px;
                         border-radius: 0.25rem;
+                    }
+
+                    .btn-danger{
+                        background-color: red;
+                        margin-left: 10px;
+                        border: 1px solid red;
                     }
 
                     &--text-danger{

@@ -145,7 +145,7 @@
   margin-top: 20px;
 }
 .container .modal-container__body .form__group {
-  margin-bottom: 3em;
+  margin-bottom: 1.5em;
 }
 .container .modal-container__body .form__group--label {
   display: block;
@@ -170,6 +170,11 @@
   width: 20%;
   padding: 10px;
   border-radius: 0.25rem;
+}
+.container .modal-container__body .form__group .btn-danger {
+  background-color: red;
+  margin-left: 10px;
+  border: 1px solid red;
 }
 .container .modal-container__body .form__group--text-danger {
   color: red;
