@@ -12,4 +12,9 @@ class Board extends Model
     protected $fillable = ['title'];
 
     protected $hidden = ['created_at', 'updated_at'];
+
+    public function cards() {
+
+        return $this->hasMany(Card::class);
+    }
 }

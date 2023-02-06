@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\CardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,4 +23,8 @@ Route::controller(BoardController::class)->group(function () {
     Route::get('/boards', 'index');
     Route::post('/boards', 'store');
     Route::delete('/boards/{board}', 'destroy');
+});
+
+Route::controller(CardController::class)->group(function () {
+    Route::post('/cards', 'store');
 });

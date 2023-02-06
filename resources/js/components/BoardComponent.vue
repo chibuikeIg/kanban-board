@@ -10,18 +10,18 @@
                     <div class="board__column__header--del-btn"><a href="#" @click="deleteBoard(board.id)">&times;</a></div>
                 </div>
                 <div class="board__column__body">
-                    <div class="board__column__body--card">
+                    <div class="board__column__body--card" v-for="card in board.cards">
                         <div class="card-draggable">
                             <span>Drag</span>
                         </div>
                         <div class="card-title">
-                            <h4>This is a card title</h4>
+                            <h4>{{ card.title }}</h4>
                         </div>
                     </div>
                 </div>
                 <div class="board__column__footer">
                     <div class="board__column__footer--add-btn">
-                        <a href="#">&plus;</a>
+                        <a href="#" @click="showAddCardModal(board.id)">&plus;</a>
                     </div>
                 </div>
             </div>
@@ -45,6 +45,31 @@
                 </div>
             </div>
         </modal>
+        <modal name="add-card-modal" :height="600">
+            <div class="modal-container">
+                <div class="modal-container__header">
+                    <h3 class="container__header--title">Add Card</h3>
+                </div>
+                <div class="modal-container__body">
+                    <form class="form"  @submit="createCard">
+                        <div class="form__group">
+                            <label class="form__group--label">Title</label>
+                            <input type="text" name="title" ref="title" class="form__group--form-control el" placeholder="Enter board title">
+                            <span class="form__group--text-danger title"></span>
+                        </div>
+                        <div class="form__group">
+                            <label class="form__group--label">Description</label>
+                            <textarea rows="10" name="description" ref="description" class="form__group--form-control el" placeholder="Write here..."></textarea>
+                            <span class="form__group--text-danger description"></span>
+                        </div>
+                        <div class="form__group">
+                            <input type="hidden"  ref="board_id">
+                            <button type="submit" class="form__group--btn">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </modal>
     </div>
 </template>
 
@@ -55,6 +80,7 @@
         data(){
             return {
                 boards:[],
+                board_id:0
             }
         },
 
@@ -102,12 +128,39 @@
                 })
             },
 
+            showAddCardModal(board_id) {
+                this.$modal.show("add-card-modal")
+                this.board_id = board_id
+            },
+
+            createCard(e) {
+
+                e.preventDefault()
+                
+                let formData = {
+                    title:this.$refs.title.value,
+                    description: this.$refs.description.value,
+                    board_id: this.board_id
+                }
+
+                this.$http.post('/cards', formData).then(_=> {
+
+                    this.fetchBoards()
+                    this.handleError([])
+                    this.$modal.hide("add-card-modal")
+
+                }).catch(err=> {
+                    
+                    this.handleError(err.response.data.errors)
+                })
+            },
+
             handleError(err) {
 
                 // get all the input fields with the class `.el`
                 let input = document.querySelectorAll('.el'); 
 
-                input.forEach( (field) => {
+                input.forEach((field) => {
             
                     if(field.name) {
             
@@ -126,7 +179,7 @@
             
                     }
             
-                } );
+                });
             }
         }
     }

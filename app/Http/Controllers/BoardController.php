@@ -9,7 +9,7 @@ class BoardController extends Controller
 {
     public function index()
     {
-        return response()->json(Board::get()->toArray());
+        return response()->json(Board::with('cards')->get()->toArray());
     }
 
     public function store(Request $request)
