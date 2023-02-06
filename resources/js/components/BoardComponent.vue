@@ -2,6 +2,7 @@
     <div class="container__content">
         <div class="action-button">
             <a href="#" @click="showAddColumnModal()" class="action-button--add-btn">New Board</a>
+            <a href="/export" class="action-button--export-btn">Export Board</a>
         </div>
         <div class="board">
             <div class="board__column" v-for="board in boards">
