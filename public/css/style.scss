@@ -95,6 +95,13 @@ $white: #fff;
 
                         .card-title {
                             width:95%;
+
+
+                            a {
+                                display: block;
+                                text-decoration: none;
+                                color:#000;
+                            }
                         }
 
                         .card-draggable {

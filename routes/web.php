@@ -27,4 +27,5 @@ Route::controller(BoardController::class)->group(function () {
 
 Route::controller(CardController::class)->group(function () {
     Route::post('/cards', 'store');
+    Route::put('/cards/{card}', 'update');
 });

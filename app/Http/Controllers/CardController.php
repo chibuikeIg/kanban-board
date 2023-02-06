@@ -19,4 +19,17 @@ class CardController extends Controller
 
         return response()->json(['message'=>'Created']);
     }
+
+    public function update(Request $request, Card $card) {
+
+        $data = $request->validate([
+            'title' => ['required', 'string', 'min:5', 'max:255'],
+            'description'=> ['required', 'string'],
+        ]);
+
+        $card->update($data);
+        $card->refresh();
+
+        return response()->json(['message'=>'Updated']);
+    }
 }

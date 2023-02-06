@@ -15,7 +15,7 @@
                             <span>Drag</span>
                         </div>
                         <div class="card-title">
-                            <h4>{{ card.title }}</h4>
+                            <h4><a href="#" @click="showEditCardModal(card)">{{ card.title }}</a></h4>
                         </div>
                     </div>
                 </div>
@@ -70,6 +70,31 @@
                 </div>
             </div>
         </modal>
+        <modal name="edit-card-modal" :height="600">
+            <div class="modal-container">
+                <div class="modal-container__header">
+                    <h3 class="container__header--title">Edit Card</h3>
+                </div>
+                <div class="modal-container__body">
+                    <form class="form"  @submit="editCard">
+                        <div class="form__group">
+                            <label class="form__group--label">Title</label>
+                            <input type="text" name="title" v-model="card.title" class="form__group--form-control el" placeholder="Enter board title">
+                            <span class="form__group--text-danger title"></span>
+                        </div>
+                        <div class="form__group">
+                            <label class="form__group--label">Description</label>
+                            <textarea rows="10" name="description" v-model="card.description" ref="description" class="form__group--form-control el" placeholder="Write here..."></textarea>
+                            <span class="form__group--text-danger description"></span>
+                        </div>
+                        <div class="form__group">
+                            <input type="hidden"  ref="card_id" v-model="card.id">
+                            <button type="submit" class="form__group--btn">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </modal>
     </div>
 </template>
 
@@ -80,7 +105,8 @@
         data(){
             return {
                 boards:[],
-                board_id:0
+                board_id:null,
+                card: {}
             }
         },
 
@@ -112,6 +138,7 @@
                     this.$refs.title.value = ''
                     this.boards.push(response.data)
                     this.handleError([])
+                    this.$modal.show("add-column-modal")
 
                 }).catch(err=> {
                     
@@ -148,6 +175,32 @@
                     this.fetchBoards()
                     this.handleError([])
                     this.$modal.hide("add-card-modal")
+
+                }).catch(err=> {
+                    
+                    this.handleError(err.response.data.errors)
+                })
+            },
+
+            showEditCardModal(card) {
+                this.$modal.show("edit-card-modal")
+                this.card = card
+            },
+
+            editCard() {
+
+                e.preventDefault()
+                
+                let formData = {
+                    title:this.$refs.title.value,
+                    description: this.$refs.description.value,
+                }
+
+                this.$http.put('/cards/'+this.card.id, formData).then(_=> {
+
+                    this.fetchBoards()
+                    this.handleError([])
+                    this.$modal.hide("edit-card-modal")
 
                 }).catch(err=> {
                     
