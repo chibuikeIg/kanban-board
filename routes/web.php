@@ -21,4 +21,5 @@ Route::get('/', function () {
 Route::controller(BoardController::class)->group(function () {
     Route::get('/boards', 'index');
     Route::post('/boards', 'store');
+    Route::delete('/boards/{board}', 'destroy');
 });

@@ -23,4 +23,11 @@ class BoardController extends Controller
 
         return response()->json($board);
     }
+
+    public function destroy(Board $board) {
+
+        $board->delete();
+
+        return response()->json($board);
+    }
 }

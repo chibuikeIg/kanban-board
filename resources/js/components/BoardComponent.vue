@@ -7,7 +7,7 @@
             <div class="board__column" v-for="board in boards">
                 <div class="board__column__header">
                     <h3 class="board__column__header--title">{{board.title}}</h3>
-                    <div class="board__column__header--del-btn"><a href="#">&times;</a></div>
+                    <div class="board__column__header--del-btn"><a href="#" @click="deleteBoard(board.id)">&times;</a></div>
                 </div>
                 <div class="board__column__body">
                     <div class="board__column__body--card">
@@ -90,6 +90,15 @@
                 }).catch(err=> {
                     
                     this.handleError(err.response.data.errors)
+                })
+            },
+
+            deleteBoard(id) {
+
+                this.$http.delete('/boards/'+id).then(_=> {
+                  
+                  this.fetchBoards()
+                  
                 })
             },
 
