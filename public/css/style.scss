@@ -108,9 +108,11 @@ $white: #fff;
                             width: 15%;
                             border-right: 1px solid #000;
 
-                            span{
+                            a{
                                 display: block;
                                 width: $full_width;
+                                text-decoration: none;
+                                color: #000;
                             }
                         }
                     }

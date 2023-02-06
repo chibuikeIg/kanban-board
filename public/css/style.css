@@ -92,9 +92,11 @@
   width: 15%;
   border-right: 1px solid #000;
 }
-.container__content .board__column__body--card .card-draggable span {
+.container__content .board__column__body--card .card-draggable a {
   display: block;
   width: 100%;
+  text-decoration: none;
+  color: #000;
 }
 .container__content .board__column__footer {
   position: absolute;

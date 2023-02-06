@@ -35,6 +35,18 @@ class CardController extends Controller
         return response()->json(['message' => 'Updated']);
     }
 
+    public function updateAll(Request $request)
+    {
+        foreach ($request->cards as $card) {
+            Card::where('id', $card['id'])->update([
+                'board_id' => $card['board_id'],
+                'order' => $card['order'],
+            ]);
+        }
+
+        return response()->json(['message' => 'Updated All']);
+    }
+
     public function destroy(Card $card)
     {
         $card->update([

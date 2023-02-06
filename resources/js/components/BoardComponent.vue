@@ -10,14 +10,16 @@
                     <div class="board__column__header--del-btn"><a href="#" @click="deleteBoard(board.id)">&times;</a></div>
                 </div>
                 <div class="board__column__body">
-                    <div class="board__column__body--card" v-for="card in board.cards">
-                        <div class="card-draggable">
-                            <span>Drag</span>
+                    <draggable :list="board.cards" :options="{animation:300, handle:'.drag-btn'}" @change="updateAllCard(board.cards)">
+                        <div class="board__column__body--card" v-for="card in board.cards">
+                            <div class="card-draggable">
+                                <a href="#" class="drag-btn">Drag</a>
+                            </div>
+                            <div class="card-title">
+                                <h4><a href="#" @click="showEditCardModal(card)">{{ card.title }}</a></h4>
+                            </div>
                         </div>
-                        <div class="card-title">
-                            <h4><a href="#" @click="showEditCardModal(card)">{{ card.title }}</a></h4>
-                        </div>
-                    </div>
+                    </draggable>
                 </div>
                 <div class="board__column__footer">
                     <div class="board__column__footer--add-btn">
@@ -84,7 +86,7 @@
                     <h3 class="container__header--title">Edit Card</h3>
                 </div>
                 <div class="modal-container__body">
-                    <form class="form"  @submit="editCard">
+                    <form class="form"  @submit="updateCard">
                         <div class="form__group">
                             <label class="form__group--label">Title</label>
                             <input type="text" name="title" v-model="card.title" class="form__group--form-control el" placeholder="Enter board title">
@@ -118,8 +120,15 @@
 </template>
 
 <script>
+
+    import axios from 'axios';
+    import draggable from 'vuedraggable'
+
     export default {
         name: 'BoardComponent',
+        components: {
+            draggable,
+        },
 
         data(){
             return {
@@ -143,7 +152,7 @@
 
             fetchBoards() {
                 
-                this.$http.get('/boards').then(response=> {
+                axios.get('/boards').then(response=> {
                     this.boards= response.data
                 })
             },
@@ -152,7 +161,7 @@
 
                 e.preventDefault()
 
-                this.$http.post('/boards', {title:this.$refs.title.value}).then(response=> {
+                axios.post('/boards', {title:this.$refs.title.value}).then(response=> {
 
                     this.$refs.title.value = ''
                     this.boards.push(response.data)
@@ -167,7 +176,7 @@
 
             deleteBoard(id) {
 
-                this.$http.delete('/boards/'+id).then(_=> {
+                axios.delete('/boards/'+id).then(_=> {
                   
                   this.fetchBoards()
                   
@@ -190,7 +199,7 @@
                     status: this.$refs.status.value
                 }
 
-                this.$http.post('/cards', formData).then(_=> {
+                axios.post('/cards', formData).then(_=> {
 
                     this.fetchBoards()
                     this.handleError([])
@@ -209,7 +218,7 @@
                 this.card = card
             },
 
-            editCard(e) {
+            updateCard(e) {
 
                 e.preventDefault()
                 
@@ -219,7 +228,7 @@
                     status: this.card.status
                 }
 
-                this.$http.put('/cards/'+this.card.id, formData).then(_=> {
+                axios.put('/cards/'+this.card.id, formData).then(_=> {
 
                     this.fetchBoards()
                     this.handleError([])
@@ -233,12 +242,21 @@
 
             deleteCard(id) {
 
-                this.$http.delete('/cards/'+id).then(_=> {
+                axios.delete('/cards/'+id).then(_=> {
 
                     this.fetchBoards()
                     this.$modal.hide("edit-card-modal")
 
                 })
+            },
+
+            updateAllCard(cards) {
+
+                cards.map((card, index) => {
+                    card.order = index +1
+                })
+                
+                axios.put('/cards/update-all', {cards:cards})
             },
 
             handleError(err) {
