@@ -10,7 +10,7 @@
                     <div class="board__column__header--del-btn"><a href="#" @click="deleteBoard(board.id)">&times;</a></div>
                 </div>
                 <div class="board__column__body">
-                    <draggable :list="board.cards" :options="{animation:300, handle:'.drag-btn'}" @change="updateAllCard(board.cards)">
+                    <draggable :list="board.cards" :options="{animation:300, handle:'.drag-btn', group:'visibility'}" @change="updateAllCard(board.cards, board.id)" @add="updateAllCard(board.cards, board.id)">
                         <div class="board__column__body--card" v-for="card in board.cards">
                             <div class="card-draggable">
                                 <a href="#" class="drag-btn">Drag</a>
@@ -164,9 +164,9 @@
                 axios.post('/boards', {title:this.$refs.title.value}).then(response=> {
 
                     this.$refs.title.value = ''
-                    this.boards.push(response.data)
+                    this.fetchBoards()
                     this.handleError([])
-                    this.$modal.show("add-column-modal")
+                    this.$modal.hide("add-column-modal")
 
                 }).catch(err=> {
                     
@@ -250,12 +250,13 @@
                 })
             },
 
-            updateAllCard(cards) {
+            updateAllCard(cards, board_id) {
 
                 cards.map((card, index) => {
                     card.order = index +1
+                    card.board_id = board_id
                 })
-                
+
                 axios.put('/cards/update-all', {cards:cards})
             },
 
