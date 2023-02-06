@@ -20,7 +20,7 @@ class Controller extends BaseController
         $sql_fname = 'kanban_board.sql';
 
         MySql::create()
-            ->setDumpBinaryPath('C:\xampp\mysql\bin')
+            ->setDumpBinaryPath(env('MYSQL_DUMP_PATH'))
             ->setDbName(env('DB_DATABASE'))
             ->setUserName(env('DB_USERNAME'))
             ->setPassword(env('DB_PASSWORD'))
