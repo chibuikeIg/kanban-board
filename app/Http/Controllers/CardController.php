@@ -2,11 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccessToken;
 use App\Models\Card;
 use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
+    public function index(Request $request)
+    {
+        if (empty($request->access_token)) {
+            return;
+        } elseif (! empty($request->access_token)) {
+            $accessToken = AccessToken::where('token', $request->access_token)->first();
+            if (empty($accessToken)) {
+                return;
+            }
+        }
+
+        $cards = Card::query();
+
+        if (! empty($request->date)) {
+            $cards->whereDate('created_at', $request->date);
+        }
+
+        if (! empty($request->status) && $request->status == 1) {
+            $cards->where('deleted_at', null);
+        } elseif (! empty($request->status) && $request->status == 0) {
+            $cards->where('deleted_at', '!=', null);
+        }
+
+        $cards = $cards->withTrashed()->get()->setHidden(['order', 'board_id', 'updated_at', 'status']);
+
+        return response()->json($cards->toArray());
+    }
+
     public function store(Request $request)
     {
         $data = $request->validate([

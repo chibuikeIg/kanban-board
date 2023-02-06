@@ -22,6 +22,8 @@ Route::get('/', function () {
 
 Route::get('/export', [Controller::class, 'exportDB']);
 
+Route::get('/generate-access-token', [Controller::class, 'generateAccessToken']);
+
 Route::controller(BoardController::class)->group(function () {
     Route::get('/boards', 'index');
     Route::post('/boards', 'store');
