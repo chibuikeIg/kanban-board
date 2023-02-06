@@ -14,9 +14,8 @@ class Card extends Model
 
     protected $hidden = ['created_at', 'updated_at'];
 
-
-    public function board() {
-
+    public function board()
+    {
         return $this->belongsTo(Board::class);
     }
 }
